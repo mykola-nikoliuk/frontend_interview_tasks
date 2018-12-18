@@ -104,3 +104,40 @@ export const debounce = (() => {
     }
   }
 })();
+
+export class LinkedList {
+  constructor(...values) {
+    this.next = null;
+    this.value = values.shift();
+    let current = this;
+
+    let currentValue;
+    while (currentValue = values.shift()) {
+      current.next = new LinkedList(currentValue);
+      current = current.next;
+    }
+  }
+
+  has(value) {
+    let res = false;
+    let current = this;
+    do {
+      if (current.value === value) {
+        res = true;
+        break;
+      }
+      current = current.next;
+    }
+    while (current);
+
+    return res;
+  }
+
+  add(value) {
+    let last = this;
+    while (last.next) {
+      last = last.next;
+    }
+    last.next = new LinkedList(value);
+  }
+}

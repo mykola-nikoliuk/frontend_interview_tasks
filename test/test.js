@@ -21,7 +21,7 @@ import {
   reduceAsync,
   seq
 } from 'tasks/medium';
-import {debounce, factorial2, longMultiply, permute} from 'tasks/hard';
+import {debounce, factorial2, LinkedList, longMultiply, permute} from 'tasks/hard';
 
 const chai = require('chai');
 const assert = chai.assert;
@@ -199,5 +199,13 @@ describe('Tests', function () {
         resolve();
       }, delay);
     }));
+    it('LinkedList', () => {
+      let list = new LinkedList(1, 2, 3);
+      assert.equal(list.add(4), undefined);
+      assert.equal(list.add(5), undefined);
+      assert.equal(list.has(1), true);
+      assert.equal(list.has(4), true);
+      assert.equal(list.has(6), false);
+    });
   });
 });

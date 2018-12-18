@@ -1,6 +1,7 @@
 
 // hard
 import {uniq} from 'tasks/easy';
+import {hash} from 'utils/hash';
 
 export function longMultiply(a, b, size) {
   const result = [];
@@ -139,5 +140,19 @@ export class LinkedList {
       last = last.next;
     }
     last.next = new LinkedList(value);
+  }
+}
+
+export class HashMap {
+  constructor() {
+    this.table = [];
+  }
+
+  set(key, value) {
+    this.table[hash(key)] = value;
+  }
+
+  get(key) {
+    return this.table[hash(key)];
   }
 }

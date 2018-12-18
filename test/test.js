@@ -21,7 +21,7 @@ import {
   reduceAsync,
   seq
 } from 'tasks/medium';
-import {debounce, factorial2, LinkedList, longMultiply, permute} from 'tasks/hard';
+import {debounce, factorial2, HashMap, LinkedList, longMultiply, permute} from 'tasks/hard';
 
 const chai = require('chai');
 const assert = chai.assert;
@@ -206,6 +206,15 @@ describe('Tests', function () {
       assert.equal(list.has(1), true);
       assert.equal(list.has(4), true);
       assert.equal(list.has(6), false);
+    });
+    it('HashMap', () => {
+      let map = new HashMap;
+      assert.equal(map.set('abc', 123), undefined);
+      assert.equal(map.set('foo', 'bar'), undefined);
+      assert.equal(map.set('foo', 'baz'), undefined);
+      assert.equal(map.get('abc'), 123);
+      assert.equal(map.get('foo'), 'baz');
+      assert.equal(map.get('def'), undefined);
     });
   });
 });

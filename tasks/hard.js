@@ -1,5 +1,7 @@
 
 // hard
+import {uniq} from 'tasks/easy';
+
 export function longMultiply(a, b, size) {
   const result = [];
   for (let i = 0; i < a.length; i++) {
@@ -54,3 +56,51 @@ export function factorial2(n, size = 1000) {
   }
   return result;
 }
+
+export function permute(str) {
+  let indexes = [];
+  let res = [];
+  let length = str.length;
+  let exit = false;
+
+  if (length) {
+    for (let i = 0; i < length; i++) {
+      indexes.push(i);
+    }
+
+    while (!exit) {
+      if (uniq(indexes).length === length) {
+        res.push(indexes.reduce((a, v) => a + str[v], ''));
+      }
+
+      let shift = length - 1;
+
+      do {
+        indexes[shift] = ++indexes[shift] % length;
+        if (indexes[shift] === 0) {
+          shift--;
+          if (shift < 0) {
+            exit = true;
+            break;
+          }
+        } else {
+          break;
+        }
+      } while (shift >= 0);
+    }
+  } else {
+    res = '';
+  }
+
+  return res;
+}
+
+export const debounce = (() => {
+  const map = new Map();
+  return (f, delay) => {
+    return (...args) => {
+      if (map.has(f)) clearTimeout(map.get(f));
+      map.set(f, setTimeout(() => f(...args), delay));
+    }
+  }
+})();
